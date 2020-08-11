@@ -1,8 +1,16 @@
-<h1>My tasks</h1>
-<ul>
-  <% @tasks.each do |task|%>
-    <li><%= link_to task.title, task_path(task)%> - <%= link_to "Remove", task_path(task), method: :delete %></li>
-  <% end%>
-</ul>
+<div class="container">
+  <h1>My tasks</h1>
+  <ul>
+    <% @task_complete = '' %>
+      <% @tasks.each do |task|%>
+        <% if task.completed == true %>
+          <% @task_complete = "[x]" %>
+        <% else %>
+        <%  @task_complete = "[  ]" %>
+        <% end %>
+        <li><%= @task_complete %> - <%= link_to task.title, task_path(task)%> - <%= link_to "Remove", task_path(task), method: :delete %></li>
+      <% end%>
+  </ul>
 
-<p><%= link_to "New Task", new_task_path %></p>
+  <div class="btn btn-light"><%= link_to "New Task", new_task_path %></div>
+</div>

@@ -13,9 +13,9 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
 
     @task_complete = if @task.completed == true
-      "This task is complete"
+      "[X] - This task is complete"
     else
-      "This task is not complete"
+      "[ ] - This task is incomplete"
     end
   end
 
@@ -45,6 +45,6 @@ class TasksController < ApplicationController
 
   def task_params
     # returns a hash of safe params
-    params.require(:task).permit(:title, :details)
+    params.require(:task).permit(:title, :details,:completed)
   end
 end
