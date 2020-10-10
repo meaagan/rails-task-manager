@@ -1,7 +1,11 @@
 <div class="container">
-  <h1><%= @task.title %></h1>
-    <p><%= @task.details %></p>
-    <p><%= @task_complete %></p>
-    <div class="btn btn-light"><%= link_to "Edit task", edit_task_path%></div>
-    <div class="btn btn-light"><%= link_to "Back to tasks", tasks_path%></div>
+  <div class="card">
+    <div class="card-body">  
+        <h1 class="card-title"><%= @task.title %></h1>
+        <p class="card-subtitle mb-2 text-muted"><%= @task.details %></p>
+        <p class="card-text"><em><%= @task_complete %></em></p>
+        <%= button_to "Edit task", edit_task_path, method: :get, class:"btn btn-warning btn-sm" %>
+        <%= link_to "Back to tasks", tasks_path %>
+    </div>
+  </div>
 </div>

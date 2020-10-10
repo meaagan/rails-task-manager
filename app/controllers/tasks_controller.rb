@@ -5,17 +5,20 @@ class TasksController < ApplicationController
 
   def create
     new_task = Task.new (task_params)
-    new_task.save
-    redirect_to tasks_path
+    if new_task.save
+      redirect_to tasks_path
+    else 
+      render :new
+    end
   end
 
   def show
     @task = Task.find(params[:id])
 
     @task_complete = if @task.completed == true
-      "[X] - This task is complete"
+      "This task is complete"
     else
-      "[ ] - This task is incomplete"
+      "This task is incomplete"
     end
   end
 

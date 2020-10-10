@@ -1,16 +1,26 @@
 <div class="container">
-  <h1>My tasks</h1>
-  <ul>
-    <% @task_complete = '' %>
-      <% @tasks.each do |task|%>
-        <% if task.completed == true %>
-          <% @task_complete = "[x]" %>
-        <% else %>
-        <%  @task_complete = "[  ]" %>
+  <div class="card">
+    <div class="card-header">
+      <h1>My tasks</h1>
+      <p>Disclaimer: The default tasks are randomly generated using the Faker gem. I apologize in advance if they are inappropriate.</p>
+      <%= link_to "New Task", new_task_path %>
+      </div>
+    <ul class="list-group list-group-flush">
+        <% @tasks.each do |task|%>
+          <% if task.completed == true %>
+            <% @task_complete = "[x]" %>
+          <% else %>
+          <%  @task_complete = "[  ]" %>
+          <% end %>
+          <li class="list-group-item">
+            <% if task.completed == true %>
+              <del><%= link_to task.title, task_path(task)%></del>
+            <% else %>
+              <%= link_to task.title, task_path(task) %>
+            <% end %>
+            <%= button_to "Remove Task", task_path(task), method: :delete, class: "btn btn-danger btn-sm" %>
+          </li>
         <% end %>
-        <li><%= @task_complete %> - <%= link_to task.title, task_path(task)%> - <%= link_to "Remove", task_path(task), method: :delete %></li>
-      <% end%>
-  </ul>
-
-  <div class="btn btn-light"><%= link_to "New Task", new_task_path %></div>
+    </ul>
+  </div>
 </div>
